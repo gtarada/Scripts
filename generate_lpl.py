@@ -31,9 +31,17 @@ import json
 import os
 from zipfile import ZipFile
 
-files_dir = '../../Downloads/roms/Sega - Mega Drive - Genesis/'
-storage_files_dir = '/storage/roms/Sega - Mega Drive - Genesis/'
-lpl_name = 'Sega - Mega Drive - Genesis.lpl'
+#rom_set = 'Sega - Mega Drive - Genesis'
+#rom_set = 'Nintendo - Nintendo Entertainment System'
+rom_set = 'Nintendo - Super Nintendo Entertainment System'
+
+#rom_extension = ".md"
+#rom_extension = ".nes"
+rom_extension = ".sfc"
+
+files_dir = '../../Downloads/roms/' + rom_set + '/'
+storage_files_dir = '/storage/roms/' + rom_set + '/'
+lpl_name = rom_set + '.lpl'
 
 list_files = os.listdir(files_dir)
 
@@ -49,7 +57,7 @@ output['items'] = []
 for file in list_files:
     if ( file.find('.zip') > 0 ) and ( file.find('[BIOS]') == -1 ):
         item = {}
-        rom_file = file.strip('.zip') + ".md"
+        rom_file = file.strip('.zip') + rom_extension
         label = file.strip('.zip')
         with ZipFile(files_dir + file, 'r') as zip:
                 for info in zip.infolist():
